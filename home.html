@@ -44,20 +44,19 @@
       text-align: center;
     }
 
-    .gif-container {
+ .gif-container {
       margin: 20px 0;
     }
 
     .gif-container img {
-      width: 200px;
-      height: 200px;
+      width: 300px;
+      height: 300px;
     }
 
     .controls {
       display: flex;
       align-items: center;
     }
-
     .controls button, .controls .mic-button {
       background-color: #fff;
       border: none;
@@ -137,10 +136,28 @@
         output.textContent += ' (End of listening)';
       });
 
-      function processCommand(command) {
+          function processCommand(command) {
         // Simple command processing
         if (command.toLowerCase() === 'hello eva') {
           respond('Hello! How can I help you today?');
+          // Here you would implement showing a popup on the home screen
+        } else if (command.toLowerCase() === 'open youtube') {
+          respond('Opening YouTube...');
+          // Placeholder for opening YouTube
+          window.open('https://www.youtube.com', '_blank');
+        } else if (command.toLowerCase() === 'open whatsapp') {
+          respond('Opening WhatsApp...');
+          // Placeholder for opening WhatsApp
+          window.open('https://web.whatsapp.com', '_blank');
+        } else if (command.toLowerCase() === 'set an alarm') {
+          respond('Setting an alarm...');
+          // Placeholder for setting an alarm
+        } else if (command.toLowerCase() === 'call mom') {
+          respond('Calling Mom...');
+          // Placeholder for making a call
+        } else if (command.toLowerCase() === 'send a hello whatsapp message to bhart brother') {
+          respond('Sending a hello WhatsApp message to Bhart brother...');
+          // Placeholder for sending a WhatsApp message
         } else if (command.toLowerCase() === 'what is the time') {
           const now = new Date();
           respond(`The time is ${now.getHours()}:${now.getMinutes()}`);

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eva Voice Assistant</title>
+</head>
+<body>
+  <h1>Welcome to Eva Voice Assistant</h1>
+  <button id="start-btn">Start Listening</button>
+  <p id="output">Say something...</p>
+
+  <script>
+    const startBtn = document.getElementById('start-btn');
+    const output = document.getElementById('output');
+
+    // Check if the browser supports the Web Speech API
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      startBtn.addEventListener('click', () => {
+        recognition.start();
+        output.textContent = 'Listening...';
+      });
+
+      recognition.addEventListener('result', (event) => {
+        const transcript = event.results[0][0].transcript.trim();
+        output.textContent = `You said: ${transcript}`;
+        processCommand(transcript);
+      });
+
+      recognition.addEventListener('end', () => {
+        output.textContent += ' (End of listening)';
+      });
+
+      function processCommand(command) {
+        // Simple command processing
+        if (command.toLowerCase() === 'hello eva') {
+          respond('Hello! How can I help you today?');
+        } else if (command.toLowerCase() === 'what is the time') {
+          const now = new Date();
+          respond(`The time is ${now.getHours()}:${now.getMinutes()}`);
+        } else {
+          respond('I did not understand that. Please try again.');
+        }
+      }
+
+      function respond(responseText) {
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(responseText);
+        synth.speak(utterance);
+        output.textContent = responseText;
+      }
+    } else {
+      output.textContent = 'Your browser does not support the Web Speech API';
+    }
+  </script>
+</body>
+</html>

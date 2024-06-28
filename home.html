@@ -55,7 +55,15 @@
 
       function respond(responseText) {
         const synth = window.speechSynthesis;
+        const voices = synth.getVoices(); // Get available voices
         const utterance = new SpeechSynthesisUtterance(responseText);
+        
+        // Set voice to female if available
+        const femaleVoice = voices.find(voice => voice.name === 'Google UK English Female');
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+        }
+        
         synth.speak(utterance);
         output.textContent = responseText;
       }

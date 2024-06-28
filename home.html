@@ -44,6 +44,10 @@
         } else if (command.toLowerCase() === 'what is the time') {
           const now = new Date();
           respond(`The time is ${now.getHours()}:${now.getMinutes()}`);
+        } else if (command.toLowerCase() === 'who developed you') {
+          respond('I was developed by Yash Pareek.');
+        } else if (command.toLowerCase() === 'why were you developed') {
+          respond('I am Yash Pareek\'s assistant, like Yash 2.0.');
         } else {
           respond('I did not understand that. Please try again.');
         }
